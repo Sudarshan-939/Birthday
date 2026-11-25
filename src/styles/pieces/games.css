@@ -1,0 +1,90 @@
+/* ---------- games ---------- */
+.pc-quiz { text-align: center; }
+.pc-quiz small { color: var(--muted); font-size: 12px; }
+.pc-quiz .q { display: block; font-family: var(--font-display); font-size: 21px; margin: 8px 0 16px; line-height: 1.3; }
+.pc-quiz .opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.pc-quiz .opts button { border: 1.5px solid var(--line); background: var(--card); border-radius: 14px; padding: 13px; font-size: 15px; font-weight: 500; transition: all .2s; }
+.pc-quiz .opts button:hover { border-color: var(--accent); }
+.pc-quiz .opts button.right { background: #2ecc71; border-color: #2ecc71; color: #fff; animation: a-pulse .5s; }
+.pc-quiz .opts button.wrong { background: #e74c3c; border-color: #e74c3c; color: #fff; animation: shake .4s; }
+.pc-quiz .opts button.dim { opacity: .45; }
+.pc-quiz .note { margin-bottom: 12px; font-size: 14.5px; color: var(--muted); animation: pop-in .3s; }
+.pc-quiz .score { font-family: var(--font-display); font-size: 54px; color: var(--accent); }
+.pc-runaway { position: relative; text-align: center; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; overflow: hidden; }
+.pc-runaway .ph { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid var(--card); box-shadow: 0 0 0 3px var(--accent); min-height: 0; }
+.pc-runaway .pc-h { font-size: 26px; }
+.pc-runaway .btns { display: flex; gap: 14px; align-items: center; justify-content: center; min-height: 80px; }
+.pc-runaway .yes { transition: transform .3s cubic-bezier(.3, 1.6, .5, 1); z-index: 2; }
+.pc-runaway .no { transition: left .25s, top .25s; white-space: nowrap; z-index: 3; background: var(--card); }
+.pc-runaway .big { font-size: 90px; animation: pop-in .5s, a-pulse 1.2s .5s infinite; }
+.pc-puzzle { text-align: center; }
+.pc-puzzle .board { display: grid; gap: 3px; aspect-ratio: 1; max-width: 360px; margin: 0 auto; background: color-mix(in srgb, var(--text) 10%, transparent); padding: 3px; border-radius: 12px; }
+.pc-puzzle .tile { border-radius: 6px; cursor: pointer; transition: transform .12s; background-repeat: no-repeat; }
+.pc-puzzle .tile:active { transform: scale(.94); }
+.pc-puzzle .tile.empty { background: transparent !important; }
+.pc-puzzle a { text-decoration: underline; cursor: pointer; }
+.pc-memory .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.pc-memory .mc .in { aspect-ratio: 1; }
+.pc-memory .mc .front, .pc-memory .mc .back { position: absolute; inset: 0; border-radius: 10px; }
+.pc-memory .mc .front { background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, var(--accent2))); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.pc-memory .mc .back img, .pc-memory .mc .back .pc-img-empty { width: 100%; height: 100%; object-fit: cover; min-height: 0; }
+.pc-memory .mc.flipped .front { pointer-events: none; }
+.pc-treasure, .pc-riddle { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.pc-treasure .map, .pc-treasure .chest { font-size: 56px; }
+.pc-treasure .chest { animation: pop-in .5s; }
+.pc-treasure small { color: var(--muted); }
+.pc-treasure b { font-family: var(--font-display); font-size: 20px; line-height: 1.3; }
+.pc-treasure .in, .pc-riddle .in { display: flex; gap: 8px; width: 100%; }
+.pc-treasure .in input, .pc-riddle .in input { flex: 1; min-width: 0; border: 2px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 11px 16px; outline: none; font-size: 15px; }
+.pc-treasure .in input:focus, .pc-riddle .in input:focus { border-color: var(--accent); }
+.pc-treasure .in.bad { animation: shake .4s; }
+.pc-treasure .in.bad input { border-color: #e74c3c; }
+.pc-treasure .hint, .pc-riddle .hint { color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; }
+.pc-riddle .q { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 32px var(--font-display); display: flex; align-items: center; justify-content: center; }
+.pc-riddle .pc-p { font-family: var(--font-display); font-size: 19px; }
+.pc-match .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pc-match .cols > div { display: flex; flex-direction: column; gap: 8px; }
+.pc-match button { border: 1.5px solid var(--line); background: var(--card); border-radius: 12px; padding: 11px 8px; font-size: 14px; min-height: 48px; transition: all .2s; }
+.pc-match button.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--card)); }
+.pc-match button.got { background: #2ecc71; border-color: #2ecc71; color: #fff; }
+.pc-match button.bad { background: #e74c3c; color: #fff; animation: shake .4s; }
+.pc-catch { position: relative; height: 420px; border-radius: 22px; overflow: hidden; background: linear-gradient(#1b1940, #4b3d8f 70%, #f6a5c0); touch-action: none; user-select: none; }
+.pc-catch .hud { position: absolute; top: 12px; left: 0; right: 0; text-align: center; color: #fff; font-size: 14px; z-index: 2; }
+.pc-catch .start { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; }
+.pc-catch .fall { position: absolute; font-size: 30px; transform: translate(-50%, -50%); pointer-events: none; filter: drop-shadow(0 0 8px #fff8); }
+.pc-catch .basket { position: absolute; bottom: 12px; transform: translateX(-50%); font-size: 48px; transition: left .06s linear; pointer-events: none; }
+.pc-catch .win { position: absolute; left: 16px; right: 16px; top: 50%; transform: translateY(-50%); }
+.pc-coupons .cp { display: flex; align-items: stretch; margin-bottom: 10px; border-radius: 14px; overflow: hidden; background: color-mix(in srgb, var(--accent2) 45%, var(--card)); border: 2px dashed var(--accent); transition: opacity .3s; }
+.pc-coupons .cp > div { flex: 1; padding: 12px 14px; }
+.pc-coupons .cp b { display: block; font-family: var(--font-display); font-size: 17px; }
+.pc-coupons .cp small { color: var(--muted); font-size: 12.5px; }
+.pc-coupons .cp button { border: 0; border-left: 2px dashed var(--accent); background: var(--accent); color: #fff; font-weight: 800; font-size: 12px; padding: 0 14px; letter-spacing: .05em; min-width: 92px; }
+.pc-coupons .cp.used { opacity: .65; }
+.pc-coupons .cp.used button { background: transparent; color: var(--accent); }
+.pc-coupons .cp.used b { text-decoration: line-through; }
+.pc-cake { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.pc-cake .cake { position: relative; width: 250px; margin: 30px auto 10px; display: flex; flex-direction: column; align-items: center; }
+.pc-cake .candles { display: flex; gap: 8px; justify-content: center; position: relative; z-index: 2; height: 70px; align-items: flex-end; flex-wrap: wrap; max-width: 170px; }
+.pc-cake .candle { width: 11px; height: 44px; border-radius: 3px; background: repeating-linear-gradient(45deg, #fff 0 5px, var(--accent) 5px 10px); position: relative; cursor: pointer; }
+.pc-cake .candle::after { content: ''; position: absolute; top: -6px; left: 50%; width: 1.5px; height: 6px; background: #333; transform: translateX(-50%); }
+.pc-cake .flame { position: absolute; bottom: 100%; left: 50%; width: 14px; height: 22px; margin-bottom: 4px; transform: translateX(-50%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: radial-gradient(circle at 50% 75%, #fff 0 15%, #ffd34d 30%, #ff8a00 65%, transparent 70%); animation: flicker .25s ease-in-out infinite alternate; filter: drop-shadow(0 0 8px #ffb84d); }
+@keyframes flicker { to { transform: translateX(-50%) scale(1.08, .92) rotate(3deg); } }
+.pc-cake .smoke { position: absolute; bottom: 100%; left: 50%; width: 6px; height: 6px; margin-bottom: 4px; border-radius: 50%; background: #aaa; opacity: 0; animation: smoke 1.5s ease-out; }
+@keyframes smoke { 0% { opacity: .8; transform: translate(-50%, 0) scale(1); } 100% { opacity: 0; transform: translate(-30%, -40px) scale(4); } }
+.pc-cake .tier { position: relative; border-radius: 12px 12px 6px 6px; background: var(--c1, #ffb6c8); box-shadow: inset 0 -10px 0 #0001; }
+.pc-cake .tier i { position: absolute; top: 0; left: 0; right: 0; height: 18px; border-radius: 12px 12px 0 0; background: var(--c2, #fff); }
+.pc-cake .tier i::after { content: ''; position: absolute; top: 12px; left: 0; right: 0; height: 14px; background: radial-gradient(circle at 10px 0, var(--c2, #fff) 9px, transparent 10px) 0 0/20px 14px repeat-x; }
+.pc-cake .t2 { width: 160px; height: 60px; }
+.pc-cake .t1 { width: 230px; height: 76px; margin-top: -2px; }
+.pc-cake .t1::after { content: '• • • • • • •'; position: absolute; bottom: 14px; left: 0; right: 0; color: var(--c3, #e0567a); letter-spacing: 6px; font-size: 14px; }
+.pc-cake .plate { width: 270px; height: 14px; border-radius: 50%; background: #e9e4ea; box-shadow: 0 8px 14px -6px #0005; margin-top: -4px; }
+.pc-cake.flavor-pink { --c1: #ffb6c8; --c2: #fff6f8; --c3: #e0567a; }
+.pc-cake.flavor-choc { --c1: #7b4a2e; --c2: #4a2a18; --c3: #f6c9a0; }
+.pc-cake.flavor-vanilla { --c1: #fbe8b8; --c2: #fffaf0; --c3: #e8a33d; }
+.pc-cake.flavor-blue { --c1: #8fb8f0; --c2: #f0f6ff; --c3: #5b4fc4; }
+.pc-wheel { text-align: center; }
+.pc-wheel .wrap { position: relative; width: 290px; height: 290px; margin: 0 auto 10px; max-width: 100%; }
+.pc-wheel .ptr { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); z-index: 3; color: var(--text); font-size: 26px; filter: drop-shadow(0 2px 2px #0005); }
+.pc-wheel .wh { width: 100%; height: 100%; border-radius: 50%; position: relative; transition: transform 4.2s cubic-bezier(.15, .85, .2, 1); border: 6px solid var(--card); box-shadow: 0 0 0 2px var(--line), 0 18px 30px -16px #0008; }
+.pc-wheel .wh span { position: absolute; left: 50%; top: 50%; width: 90px; margin-left: -45px; margin-top: -10px; height: 20px; text-align: center; font-size: 11.5px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #0006; transform-origin: 50% 50%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-wheel .hub { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; border: 4px solid var(--card); background: var(--text); color: var(--card); font-weight: 800; font-size: 12px; z-index: 2; box-shadow: 0 4px 10px #0005; }

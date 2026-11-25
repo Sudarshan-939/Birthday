@@ -1,0 +1,61 @@
+/* ---------- music & places ---------- */
+.pc-vinyl { position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px 0; user-select: none; }
+.pc-vinyl .rec { width: 230px; height: 230px; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 2px, #1d1d1d 2px 4px); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px -16px #000a, inset 0 0 0 6px #0a0a0a; position: relative; }
+.pc-vinyl .rec::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(135deg, transparent 40%, #ffffff18 50%, transparent 60%); }
+.pc-vinyl .rec.spin, .pc-cassette .reels i.spin { animation: spin 2.4s linear infinite; }
+.pc-vinyl .lbl { width: 86px; height: 86px; border-radius: 50%; background: var(--accent); overflow: hidden; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; border: 3px solid #111; }
+.pc-vinyl .lbl img { width: 100%; height: 100%; object-fit: cover; }
+.pc-vinyl .arm { position: absolute; top: 4px; right: calc(50% - 150px); width: 12px; height: 140px; background: linear-gradient(#ddd, #999); border-radius: 6px; transform-origin: top center; transform: rotate(-28deg); transition: transform .6s; box-shadow: 2px 4px 8px #0005; }
+.pc-vinyl .arm::before { content: ''; position: absolute; top: -10px; left: -8px; width: 28px; height: 28px; border-radius: 50%; background: #bbb; }
+.pc-vinyl .arm.on { transform: rotate(-6deg); }
+.pc-vinyl .meta { text-align: center; margin-top: 16px; display: flex; flex-direction: column; }
+.pc-vinyl .meta b { font-family: var(--font-display); font-size: 21px; } .pc-vinyl .meta small { color: var(--muted); }
+.pc-cassette { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.pc-cassette .tape { width: 290px; max-width: 100%; aspect-ratio: 1.6; border-radius: 14px; background: linear-gradient(145deg, #3b3b46, #24242c); padding: 14px; box-shadow: 0 20px 34px -16px #000a; cursor: pointer; position: relative; }
+.pc-cassette .label { background: color-mix(in srgb, var(--accent2) 80%, #fff); color: #3b2e2a; border-radius: 6px; padding: 6px 12px; height: 58%; display: flex; flex-direction: column; background-image: repeating-linear-gradient(transparent 0 15px, #0000001a 15px 16px); }
+.pc-cassette .label b { font-family: 'Caveat', cursive; font-size: 24px; line-height: 1.1; } .pc-cassette .label small { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.pc-cassette .reels { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); display: flex; gap: 70px; background: #111; padding: 6px 18px; border-radius: 30px; }
+.pc-cassette .reels i { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle, #fff 0 4px, transparent 5px), repeating-conic-gradient(#ddd 0 30deg, #888 30deg 60deg); border: 3px solid #eee; }
+.piece.bare[data-type=cassette] .pc-cassette ol { background: var(--card); border-radius: 18px; border: 1px solid var(--line); }
+.pc-cassette ol { width: 100%; margin: 0; padding: 10px 14px 10px 36px; list-style: decimal; }
+.pc-cassette li { padding: 8px 0; border-bottom: 1px dashed var(--line); cursor: pointer; font-size: 14.5px; }
+.pc-cassette li:last-child { border: 0; }
+.pc-cassette li.on { color: var(--accent); font-weight: 700; }
+.pc-playlist .hd { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.pc-playlist .ic { width: 60px; height: 60px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; }
+.pc-playlist .hd small { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); } .pc-playlist .hd b { display: block; font-family: var(--font-display); font-size: 20px; }
+.pc-playlist .row { display: flex; gap: 12px; align-items: center; padding: 9px 6px; border-radius: 12px; cursor: pointer; flex-wrap: nowrap; }
+.pc-playlist .row.on { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.pc-playlist .row b { display: block; font-size: 14.5px; } .pc-playlist .row small { color: var(--muted); font-size: 12.5px; }
+.pc-playlist .row.on b { color: var(--accent); }
+.pc-playlist .n { width: 22px; flex: none; text-align: center; color: var(--muted); font-size: 13px; }
+.eq { display: inline-flex; gap: 2px; align-items: flex-end; height: 14px; }
+.eq i { width: 3px; background: var(--accent); animation: eq .8s ease-in-out infinite; height: 40%; }
+.eq i:nth-child(2) { animation-delay: .2s; } .eq i:nth-child(3) { animation-delay: .4s; }
+@keyframes eq { 50% { height: 100%; } }
+.pc-np { background: linear-gradient(170deg, color-mix(in srgb, var(--accent) 60%, #222), #181818); color: #fff; border-radius: 22px; padding: 22px; box-shadow: 0 20px 40px -18px #000a; }
+.pc-np > img, .pc-np > .pc-img-empty { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; box-shadow: 0 14px 30px -10px #000a; transition: transform .5s; transform: scale(.94); }
+.pc-np > img.pl { transform: scale(1); }
+.pc-np .row { justify-content: space-between; margin-top: 16px; flex-wrap: nowrap; }
+.pc-np .row b { display: block; font-size: 19px; } .pc-np .row small { opacity: .7; }
+.pc-np .lk { border: 0; background: none; color: #1ed760; font-size: 26px; }
+.pc-np .bar { height: 4px; border-radius: 4px; background: #ffffff40; margin-top: 14px; }
+.pc-np .bar i { display: block; height: 100%; background: #fff; border-radius: 4px; transition: width .4s; }
+.pc-np .tm { display: flex; justify-content: space-between; font-size: 11px; opacity: .6; margin-top: 4px; }
+.pc-np .ctl { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 8px; font-size: 22px; }
+.pc-np .ctl button { width: 60px; height: 60px; border-radius: 50%; border: 0; background: #fff; color: #111; font-size: 20px; }
+.pc-map .mapbox { position: relative; aspect-ratio: 1.1; border-radius: 16px; overflow: hidden; background: #e8efe0; background-image: linear-gradient(30deg, transparent 47%, #fff 47% 53%, transparent 53%), linear-gradient(110deg, transparent 48%, #fff 48% 51%, transparent 51%), linear-gradient(160deg, transparent 60%, #bfdcef 60% 70%, transparent 70%), radial-gradient(circle at 70% 30%, #cfe3c0 0 60px, transparent 61px), radial-gradient(circle at 25% 75%, #d7e8c8 0 50px, transparent 51px); }
+.pc-map .pin { position: absolute; transform: translate(-50%, -100%); border: 0; background: none; font-size: 30px; padding: 0; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 3px 3px #0004); transition: transform .2s; }
+.pc-map .pin span { font-size: 10.5px; font-weight: 700; background: #fff; color: #333; padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
+.pc-map .pin.on { transform: translate(-50%, -100%) scale(1.25); z-index: 2; }
+.pc-map .note { margin-top: 12px; padding: 12px; border-radius: 14px; background: color-mix(in srgb, var(--accent2) 35%, var(--card)); font-size: 14.5px; animation: pop-in .3s; }
+.pc-voice { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pc-voice .play { width: 50px; height: 50px; border-radius: 50%; border: 0; background: var(--accent); color: #fff; font-size: 17px; flex: none; }
+.pc-voice .wave { flex: 1; height: 44px; display: flex; align-items: center; gap: 2px; min-width: 150px; }
+.pc-voice .wave i { flex: 1; background: var(--accent); border-radius: 3px; }
+.pc-voice .wave i.live { animation: eq 1s ease-in-out infinite; }
+.pc-voice .wave i:nth-child(3n).live { animation-delay: .3s; } .pc-voice .wave i:nth-child(3n+1).live { animation-delay: .6s; }
+.pc-voice .lab { width: 100%; font-size: 13.5px; color: var(--muted); }
+.pc-video iframe, .pc-video video { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 16px; background: #000; display: block; box-shadow: 0 18px 30px -16px #0008; }
+.pc-video .empty { aspect-ratio: 16/9; border-radius: 16px; border: 2px dashed var(--line); display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.pc-video .cap { text-align: center; font-family: 'Caveat', cursive; font-size: 22px; margin-top: 8px; }
