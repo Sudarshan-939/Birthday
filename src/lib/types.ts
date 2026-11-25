@@ -29,7 +29,7 @@ export type Gift = {
   colors?: Partial<ThemeColors>; // custom overrides
   font: string;
   transition: 'slide' | 'fade' | 'flip' | 'zoom' | 'curtain';
-  opener: { enabled: boolean; style: 'envelope' | 'giftbox' | 'curtain' | 'tap'; line: string };
+  opener: { enabled: boolean; style: 'envelope' | 'giftbox' | 'curtain' | 'tap'; line: string; curtain?: string; name?: string };
   music: { track: string; custom?: string; customName?: string; volume?: number };
   sfx: string;
   effect: { type: 'none' | 'hearts' | 'confetti' | 'stars' | 'petals' | 'snow' | 'bubbles' | 'emoji'; emoji?: string };

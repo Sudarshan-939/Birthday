@@ -96,9 +96,9 @@ function Opener({ gift, onOpen }: { gift: Gift; onOpen: () => void }) {
   const [opening, setOpening] = useState(false);
   const style = gift.opener.style || 'envelope';
   const go = (e: React.MouseEvent) => { if (opening) return; setOpening(true); sfx('open'); hearts(e.currentTarget as any); setTimeout(onOpen, style === 'tap' ? 300 : 1100); };
-  const line = fill(gift.opener.line || 'For {name} ♡', { name: gift.to, sender: gift.from });
+  const line = fill(gift.opener.line || 'For {name} ♡', { name: (style === 'curtain' && gift.opener.name) || gift.to, sender: gift.from });
   return (
-    <div className={`opener op-${style} ${opening ? 'opening' : ''}`} onClick={go}>
+    <div className={`opener op-${style} ${style === 'curtain' ? 'cd-' + (gift.opener.curtain || 'red') : ''} ${opening ? 'opening' : ''}`} onClick={go}>
       {style === 'envelope' && <div className="op-env"><div className="b" /><div className="paper">♡</div><div className="f"><span>{line}</span></div><div className="flap" /><div className="seal">💌</div></div>}
       {style === 'giftbox' && <div className="op-box"><div className="lid" /><div className="body"><span>{line}</span></div></div>}
       {style === 'curtain' && <><div className="cur l" /><div className="cur r" /><div className="op-cur-txt">{line}</div></>}

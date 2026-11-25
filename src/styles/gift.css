@@ -120,12 +120,21 @@
 .op-box .lid::before { content: '🎀'; position: absolute; top: -34px; left: 50%; transform: translateX(-50%); font-size: 46px; }
 .opening .op-box .lid { transform: translate(60px, -160px) rotate(40deg); animation: none; }
 .opener.op-curtain { background: var(--page); }
-.cur { position: absolute; top: 0; bottom: 0; width: 51%; background: repeating-linear-gradient(90deg, #8e1b2c 0 18px, #a8263a 18px 30px, #7a1525 30px 40px); box-shadow: inset 0 -40px 60px rgba(0, 0, 0, .4); transition: transform 1s cubic-bezier(.6, 0, .3, 1); z-index: 1; }
+.cur { position: absolute; top: 0; bottom: 0; width: 51%; background: repeating-linear-gradient(90deg, var(--cd1, #8e1b2c) 0 18px, var(--cd2, #a8263a) 18px 30px, var(--cd3, #7a1525) 30px 40px); box-shadow: inset 0 -40px 60px rgba(0, 0, 0, .4); transition: transform 1s cubic-bezier(.6, 0, .3, 1); z-index: 1; }
 .cur.l { left: 0; transform-origin: left; } .cur.r { right: 0; }
 .opening .cur.l { transform: translateX(-100%); } .opening .cur.r { transform: translateX(100%); }
-.op-cur-txt { position: relative; z-index: 2; font-family: var(--font-display); font-size: 28px; color: #fde9c9; text-shadow: 0 2px 8px #0008; text-align: center; padding: 0 20px; transition: opacity .3s; }
+.op-cur-txt { position: relative; z-index: 2; font-family: var(--font-display); font-size: 28px; color: var(--cdt, #fde9c9); text-shadow: 0 2px 8px #0008; text-align: center; padding: 0 20px; transition: opacity .3s; }
 .opening .op-cur-txt { opacity: 0; }
-.op-curtain .op-hint { position: relative; z-index: 2; color: #fde9c9; }
+.op-curtain .op-hint { position: relative; z-index: 2; color: var(--cdt, #fde9c9); }
+/* curtain designs */
+.cd-red { --cd1: #8e1b2c; --cd2: #a8263a; --cd3: #7a1525; --cdt: #fde9c9; }
+.cd-maroon { --cd1: #5a0f1c; --cd2: #741627; --cd3: #470a15; --cdt: #f5d58a; }
+.cd-blue { --cd1: #1c2f7a; --cd2: #2a43a0; --cd3: #152363; --cdt: #f4e3b5; }
+.cd-pink { --cd1: #d9668f; --cd2: #ec86a8; --cd3: #c4517b; --cdt: #fff4f7; }
+.cd-purple { --cd1: #4b1d77; --cd2: #642b9a; --cd3: #3a1460; --cdt: #f3e2ff; }
+.cd-emerald { --cd1: #0f5a43; --cd2: #177457; --cd3: #0a4634; --cdt: #f6e7b8; }
+.cd-black { --cd1: #141414; --cd2: #262626; --cd3: #0b0b0b; --cdt: #e9c46a; }
+.cd-gold { --cd1: #b8892f; --cd2: #d9ae4f; --cd3: #9c7224; --cdt: #fffaf0; }
 .op-tap { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; padding: 20px; }
 .op-tap .heart { font-size: 90px; animation: a-pulse 1.2s infinite; transition: transform .3s; }
 .op-tap b { font-family: var(--font-display); font-size: 26px; }

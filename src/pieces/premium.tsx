@@ -123,7 +123,7 @@ const Hero: PieceDef = {
 };
 
 /* ------------------------------------------------------------------ 3. name + winding photo ribbon */
-const RIBBON = 'M 430 -60 C 330 40, 110 40, 120 170 C 128 270, 290 290, 292 205 C 294 120, 150 130, 160 250 C 172 380, 330 420, 470 560';
+const RIBBON = 'M 640 -130 C 420 -30, 0 60, 10 340 C 20 660, 570 680, 590 430 C 610 190, 300 150, 260 390 C 220 630, 410 780, 720 1020';
 const Ribbon: PieceDef = {
   type: 'pm-ribbon', label: 'Name + photo ribbon', icon: '🎞️', cat: 'premium', bare: true,
   desc: 'Happy / Birthday / their name in big type, with a ribbon of photos winding past in a loop',

@@ -302,6 +302,8 @@ function SoundPanel({ gift, setG }: { gift: Gift; setG: (p: Partial<Gift>) => vo
   );
 }
 
+const CURTAINS: [string, string][] = [['red', 'Red velvet'], ['maroon', 'Royal maroon'], ['blue', 'Royal blue'], ['pink', 'Rose pink'], ['purple', 'Purple velvet'], ['emerald', 'Emerald'], ['black', 'Black & gold'], ['gold', 'Gold satin']];
+
 function ExtrasPanel({ gift, setG }: { gift: Gift; setG: (p: Partial<Gift>) => void }) {
   const lock = gift.lock || {};
   const setLock = (p: Partial<NonNullable<Gift['lock']>>) => setG({ lock: { ...lock, ...p } });
@@ -325,6 +327,12 @@ function ExtrasPanel({ gift, setG }: { gift: Gift; setG: (p: Partial<Gift>) => v
       {gift.opener.enabled && <>
         <div className="seg wrap">{([['envelope', '✉️ Sealed envelope'], ['giftbox', '🎁 Gift box'], ['curtain', '🎭 Curtain'], ['tap', '💗 Tap heart']] as [Gift['opener']['style'], string][]).map(([s, l]) => <button key={s} className={gift.opener.style === s ? 'on' : ''} onClick={() => setG({ opener: { ...gift.opener, style: s } })}>{l}</button>)}</div>
         <label className="fld"><span className="fl">Line on it</span><input value={gift.opener.line} onChange={(e) => setG({ opener: { ...gift.opener, line: e.target.value } })} /></label>
+        {gift.opener.style === 'curtain' && <>
+          <span className="fl">Curtain design</span>
+          <div className="curtain-designs">{CURTAINS.map(([id, label]) => <button key={id} className={(gift.opener.curtain || 'red') === id ? 'on' : ''} onClick={() => setG({ opener: { ...gift.opener, curtain: id } })} title={label}><i className={`cd-sw cd-${id}`} /><small>{label}</small></button>)}</div>
+          <label className="fld"><span className="fl">Name on the curtain</span><input value={gift.opener.name || ''} placeholder={gift.to} onChange={(e) => setG({ opener: { ...gift.opener, name: e.target.value } })} /></label>
+          <p className="muted">The name replaces <code>{'{name}'}</code> in the line above, only on the curtain.</p>
+        </>}
       </>}
 
       <h4>Seal until a date & time <span className="free">free</span></h4>
