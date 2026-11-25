@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { PieceDef, F, Img, Para, useInView } from './core';
-import { sfx, isPlaying, pauseMusic, resumeMusic, playMusic } from '../lib/audio';
+import { sfx, isPlaying, isPaused, pauseMusic, resumeMusic, playMusic } from '../lib/audio';
 
 /* "Birthday Cinema": the premium long-scroll birthday website.
    Each section is its own piece, so people can reorder, remove or reuse any of them. */
@@ -99,11 +99,13 @@ export function MusicPill({ title, sub, cover, song, className = '' }: { title: 
 const Hero: PieceDef = {
   type: 'pm-hero', label: 'Balloons hero', icon: '🎈', cat: 'premium', bare: true,
   desc: 'Their photo, softly blurred, a giant age, glossy balloons floating up and a music player',
-  fields: [F.ph('photo', 'Background photo'), F.t('big', 'Big number', '{age}'), F.t('w1', 'First word'), F.t('w2', 'Second word'), F.e('emoji', 'Emoji'), F.r('blur', 'Background blur', 0, 20),
-    F.t('song', 'Song name'), F.t('songSub', 'Under the song name'), F.ph('cover', 'Song cover'), F.au('audio', 'Your own song file (optional)')],
+  fields: [F.au('audio', '🎵 Your own song (upload an audio file, it plays for the whole page)'), F.ph('photo', 'Background photo'), F.t('big', 'Big number', '{age}'), F.t('w1', 'First word'), F.t('w2', 'Second word'), F.e('emoji', 'Emoji'), F.r('blur', 'Background blur', 0, 20),
+    F.t('song', 'Song name'), F.t('songSub', 'Under the song name'), F.ph('cover', 'Song cover')],
   defaults: () => ({ photo: PD(6), big: '{age}', w1: 'Happy', w2: 'Birthday', emoji: '🎂', blur: 7, song: 'Lovely Song', songSub: 'BIRTHDAY PLAYLIST', cover: PD(11), audio: '' }),
-  Render: ({ p }) => {
+  Render: ({ p, ctx }) => {
     const [ref, seen] = useInView<HTMLDivElement>(0.3);
+    // their own song replaces the template track as soon as the gift opens
+    useEffect(() => { if (p.audio && !ctx.editing && !isPaused()) playMusic('custom', p.audio); }, [p.audio, ctx.editing]);
     const letters = (w: string, base: number) => Array.from(w || '').map((ch, i) => <span key={i} style={{ animationDelay: `${(base + i) * 0.09}s`, '--r': `${((i * 37 + base * 11) % 24) - 12}deg`, '--y': `${((i * 53 + base * 7) % 30) - 15}px` } as any}>{ch === ' ' ? '\u00a0' : ch}</span>);
     return (
       <div className={`pm pm-hero ${seen ? 'in' : ''}`} ref={ref}>
@@ -284,7 +286,7 @@ const Bleed: PieceDef = {
   defaults: () => ({ photo: PD(5), caption: '' }),
   Render: ({ p }) => {
     const [ref, seen] = useInView<HTMLDivElement>(0.25);
-    return <div className={`pm pm-bleed ${seen ? 'in' : ''}`} ref={ref}><Img src={p.photo} />{p.caption && <div className="cap">{p.caption}</div>}</div>;
+    return <div className={`pm pm-bleed ${seen ? 'in' : ''}`} ref={ref}><div className="frame"><Img src={p.photo} />{p.caption && <div className="cap">{p.caption}</div>}</div></div>;
   },
 };
 
@@ -298,8 +300,8 @@ const Masonry: PieceDef = {
     const [zoom, setZoom] = useState<string | null>(null);
     return (
       <div className={`pm pm-masonry ${seen ? 'in' : ''}`} ref={ref}>
-        {p.title && <h2 className="pm-title light">{p.title}</h2>}
-        <div className="cols">{list<any>(p.photos).map((ph, i) => <figure key={i} style={{ transitionDelay: `${i * 0.09}s` }} onClick={() => setZoom(srcOf(ph))}><Img src={srcOf(ph)} /></figure>)}</div>
+        {p.title && <h2 className="pm-title">{p.title}</h2>}
+        <div className="cols">{list<any>(p.photos).map((ph, i) => <figure key={i} style={{ '--d': `${i * 0.09}s` } as any} onClick={() => setZoom(srcOf(ph))}><Img src={srcOf(ph)} /></figure>)}</div>
         {zoom && <div className="pc-lightbox" onClick={() => setZoom(null)}><img src={zoom} alt="" /></div>}
       </div>
     );

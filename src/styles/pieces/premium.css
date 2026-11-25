@@ -11,6 +11,7 @@
 /* the premium template is a full-width, single long page */
 .gift-page:has(.pm) { padding: 0; }
 .gift-page-inner:has(> .piece > .pm) { max-width: none; padding: 0; gap: 0; container-type: inline-size; }
+.player:has(.pm) .pl-prog { visibility: hidden; }
 .player:has(.pm) .pl-end { padding: 26px 0 40px; background: var(--pm-cream); margin: 0; }
 
 .pm { position: relative; overflow: hidden; font-family: var(--pm-sans); color: #1d1d1d; }
@@ -81,13 +82,19 @@
 .pm-ribbon .rib { position: relative; height: 500px; opacity: 0; transition: opacity 1.2s .3s; }
 .pm-ribbon.in .rib { opacity: 1; }
 .pm-ribbon .pm-track { position: absolute; left: 50%; top: 10px; width: 400px; height: 480px; margin-left: -200px; }
-.pm-ribbon .sq { position: absolute; left: 0; top: 0; width: 66px; height: 66px; offset-rotate: auto; animation: pm-ride linear infinite; border: 3px solid #fff; background: #ddd; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); }
+.pm-ribbon .sq { position: absolute; left: 0; top: 0; width: 78px; height: 78px; offset-rotate: auto; animation: pm-ride linear infinite; border: 3px solid #fff; background: #ddd; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); }
 .pm-ribbon .sq img { width: 100%; height: 100%; object-fit: cover; }
 .pm-ribbon .pm-track.mono .sq img { filter: grayscale(1) contrast(1.08); }
 @keyframes pm-ride { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @container (min-width: 760px) {
-  .pm-ribbon { grid-template-columns: 1fr 1fr; padding: 80px 6cqw; min-height: 680px; }
-  .pm-ribbon .rib { height: 560px; }
+  .pm-ribbon { grid-template-columns: 1fr 1fr; padding: 60px 6cqw; min-height: 680px; }
+  .pm-ribbon .rib { height: 580px; }
+  .pm-ribbon .pm-track { left: 30%; margin-left: -237px; transform: scale(1.15); transform-origin: 0 0; }
+}
+@container (min-width: 1200px) {
+  .pm-ribbon { min-height: 780px; }
+  .pm-ribbon .rib { height: 720px; }
+  .pm-ribbon .pm-track { left: 0; margin-left: -297px; transform: scale(1.45); }
 }
 
 /* ---------- 4. polaroid board */
@@ -184,18 +191,20 @@
 .mg-back .pm-barcode { position: static; width: 24cqw; }
 
 /* ---------- 6. full bleed + masonry */
-.pm-bleed { height: clamp(420px, 86vh, 820px); background: #111; }
-.pm-bleed img, .pm-bleed .pc-img-empty { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.4); transition: transform 7s cubic-bezier(.2, .7, .3, 1); }
+.pm-bleed { background: var(--pm-cream) var(--pm-doodle); padding: 50px 6cqw; }
+.pm-bleed .frame { position: relative; max-width: 1100px; height: clamp(340px, 68vh, 660px); margin: 0 auto; border-radius: 18px; overflow: hidden; background: #111; box-shadow: 0 26px 60px rgba(60, 40, 10, .25); }
+.pm-bleed .frame img, .pm-bleed .frame .pc-img-empty { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.4); transition: transform 7s cubic-bezier(.2, .7, .3, 1); }
 .pm-bleed.in img { transform: scale(1.02); }
 .pm-bleed .cap { position: absolute; left: 0; right: 0; bottom: 10%; text-align: center; font-family: var(--pm-serif); font-style: italic; color: #fff; font-size: clamp(26px, 5cqw, 46px); text-shadow: 0 4px 20px rgba(0, 0, 0, .5); padding: 0 20px; }
-.pm-masonry { background: #0e0e0e; padding: 6px; }
-.pm-masonry .cols { columns: 2; column-gap: 6px; }
-.pm-masonry figure { margin: 0 0 6px; break-inside: avoid; cursor: zoom-in; opacity: 0; transform: translateY(24px) scale(.98); transition: opacity .9s, transform .9s cubic-bezier(.2, .8, .3, 1); overflow: hidden; }
-.pm-masonry.in figure { opacity: 1; transform: none; }
-.pm-masonry figure img, .pm-masonry figure .pc-img-empty { width: 100%; object-fit: cover; aspect-ratio: 4 / 5; transition: transform .6s; }
+.pm-masonry { background: var(--pm-cream) var(--pm-doodle); padding: 46px 6cqw 56px; }
+.pm-masonry .cols { columns: 2; column-gap: 14px; max-width: 900px; margin: 0 auto; }
+.pm-masonry figure { position: relative; margin: 0 0 14px; break-inside: avoid; cursor: zoom-in; opacity: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(60, 40, 10, .14); transition: transform .35s cubic-bezier(.2, .9, .3, 1.3), box-shadow .35s; }
+.pm-masonry.in figure { opacity: 1; animation: pm-tile .9s cubic-bezier(.2, .8, .3, 1) backwards; animation-delay: var(--d, 0s); }
+@keyframes pm-tile { from { opacity: 0; transform: translateY(24px) scale(.98); } }
+.pm-masonry.in figure:hover { transform: scale(1.14); z-index: 3; box-shadow: 0 26px 56px rgba(0, 0, 0, .35), 0 0 0 4px #fff, 0 0 0 7px var(--pm-gold); }
+.pm-masonry figure img, .pm-masonry figure .pc-img-empty { width: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
 .pm-masonry figure:nth-child(3n + 2) img { aspect-ratio: 1; }
 .pm-masonry figure:nth-child(3n) img { aspect-ratio: 3 / 4.4; }
-.pm-masonry figure:hover img { transform: scale(1.05); }
 @container (min-width: 760px) { .pm-masonry .cols { columns: 3; } }
 
 /* ---------- 7. wishes + brush reveal */
@@ -240,7 +249,7 @@
 .pm-badge .hint { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; font-size: 12px; color: #a3998a; letter-spacing: .08em; }
 
 /* ---------- 9. iPhone chat */
-.pm-chat { padding: 70px 16px 46px; display: flex; flex-direction: column; align-items: center; background: linear-gradient(100deg, #e9544f 0%, #f27b62 38%, #f5e8d6 50%, #4a74d6 62%, #2a4fae 100%); }
+.pm-chat { padding: 70px 16px 46px; display: flex; flex-direction: column; align-items: center; background: var(--pm-cream) var(--pm-doodle); }
 .pm-chat .pm-phone { position: relative; width: 300px; height: 620px; max-width: 100%; background: #fff; border: 11px solid #111; border-radius: 50px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 34px 70px rgba(0, 0, 0, .35), 0 0 0 2px #3a3a3a; opacity: 0; transform: translateY(70px); transition: opacity 1s, transform 1.1s cubic-bezier(.2, .8, .3, 1); }
 .pm-chat.in .pm-phone { opacity: 1; transform: none; }
 .pm-chat .island { position: absolute; top: 8px; left: 50%; width: 96px; height: 27px; margin-left: -48px; background: #111; border-radius: 20px; z-index: 3; }
@@ -270,7 +279,7 @@
 .pm-chat .inp .ph { color: #bbb; }
 .pm-chat .inp button { width: 34px; height: 34px; border-radius: 50%; border: 0; background: #ddd; color: #fff; font-size: 18px; font-weight: 700; flex: none; transition: background .3s; }
 .pm-chat .inp button.on { background: linear-gradient(#ffc93c, #ff8a00); }
-.pm-chat .replay { margin-top: 20px; background: rgba(255, 255, 255, .2); color: #fff; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; padding: 8px 20px; font: 600 13px var(--pm-sans); letter-spacing: .12em; cursor: pointer; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pm-chat .replay { margin-top: 20px; background: #3b3a37; color: #fff; border: 0; border-radius: 999px; padding: 8px 20px; font: 600 13px var(--pm-sans); letter-spacing: .12em; cursor: pointer; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 
 @media (prefers-reduced-motion: reduce) {
   .pm-hero .bl, .pm-ribbon .sq, .pm-mandala { animation-play-state: paused; }

@@ -3,7 +3,7 @@ import type { Gift, Page, Sticker } from '../lib/types';
 import { themeVars, isDark } from '../lib/themes';
 import { fillDeep, fill, graphemes } from '../lib/util';
 import { PIECES } from '../pieces';
-import { playMusic, stopMusic, sfx, setSfxSet, isPlaying, isPaused } from '../lib/audio';
+import { playMusic, stopMusic, sfx, setSfxSet, isPlaying, isPaused, resumeMusic } from '../lib/audio';
 import { hearts, burst } from '../lib/fx';
 import { doodleSvg } from '../lib/stickers';
 
@@ -134,7 +134,7 @@ export default function Player({ gift, onExit, embedded }: { gift: Gift; onExit?
     const k = (e: KeyboardEvent) => { if ((e.target as HTMLElement)?.tagName === 'INPUT' || (e.target as HTMLElement)?.tagName === 'TEXTAREA') return; if (e.key === 'ArrowRight') go(i + 1); if (e.key === 'ArrowLeft') go(i - 1); };
     addEventListener('keydown', k); return () => removeEventListener('keydown', k);
   });
-  const toggleMute = () => { if (muted || !isPlaying()) { setMuted(false); playMusic(gift.music.track, gift.music.custom, gift.music.volume); } else { setMuted(true); stopMusic(); } };
+  const toggleMute = () => { if (muted || !isPlaying()) { setMuted(false); if (pages.some((pg) => pg.pieces.some((x) => x.type === 'pm-hero' && x.props.audio))) resumeMusic(); else playMusic(gift.music.track, gift.music.custom, gift.music.volume); } else { setMuted(true); stopMusic(); } };
 
   return (
     <div className={`player ${isDark(gift.theme) ? 'dark' : ''} ${embedded ? 'embedded' : ''}`} style={vars as any} onPointerDown={() => { if (phase === 'pages' && !muted && !isPlaying() && !isPaused() && gift.music?.track !== 'none') startMusic(); }}>
