@@ -94,7 +94,7 @@
 @container (min-width: 1200px) {
   .pm-ribbon { min-height: 960px; }
   .pm-ribbon .rib { height: 920px; }
-  .pm-ribbon .pm-track { left: 0; margin-left: -260px; transform: scale(.87); }
+  .pm-ribbon .pm-track { left: 0; margin-left: -110px; transform: scale(.87); }
 }
 
 /* ---------- 4. polaroid board */
