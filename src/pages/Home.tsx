@@ -6,7 +6,7 @@ import { STICKER_COUNT } from '../lib/stickers';
 import { THEMES } from '../lib/themes';
 import { TRACKS } from '../lib/audio';
 
-const DEMOS = ['b-candles', 'proposal-classic', 'sorry-cute', 'mini-golgappa'];
+const DEMOS = ['b-candles', 'birthday-cinema', 'proposal-classic', 'sorry-cute', 'mini-golgappa'];
 
 export default function Home() {
   const [demo, setDemo] = useState(0);
@@ -17,7 +17,7 @@ export default function Home() {
         <div className="hero-txt">
           <span className="pill">✨ Every template & feature free — no sign-up, no ads</span>
           <h1>Tiny pages,<br />huge <em>hearts</em>.</h1>
-          <p>Make an interactive gift page for a birthday, an anniversary, an apology or just because. Cakes they blow out, puzzles, letters, 3D museums and 115+ more pieces. Fill it in, then send a link.</p>
+          <p>Make an interactive gift page for a birthday, an anniversary, an apology or just because. Cakes they blow out, puzzles, letters, 3D museums, a Vogue magazine and 120+ more pieces. Fill it in, then send a link.</p>
           <div className="row"><a className="btn" href="#/gifts">Create a gift</a><button className="btn ghost" onClick={() => document.getElementById('templates')?.scrollIntoView({ behavior: 'smooth' })}>Explore templates</button></div>
           <div className="stats"><div><b>{TEMPLATES.length}</b> templates</div><div><b>{ALL_PIECES.length}</b> pieces</div><div><b>{STICKER_COUNT}+</b> stickers</div><div><b>₹0</b> forever</div></div>
         </div>
@@ -26,6 +26,22 @@ export default function Home() {
           <div className="demo-tabs">{DEMOS.map((d, i) => <button key={d} className={i === demo ? 'on' : ''} onClick={() => setDemo(i)}>{findTemplate(d)!.name}</button>)}</div>
           <small>↑ a real gift. Tap it.</small>
         </div>
+      </section>
+
+      <section className="block premium-block" id="premium">
+        <div className="block-head"><span className="pill gold">👑 Premium · still free</span><h2>Premium gifts, <em>no price tag</em></h2><p>Our most elaborate templates: whole birthday websites with cinematic sections, a magazine, a swinging ID badge and a chat that types itself. Elsewhere this is the paid tier. Here it is free, with no sign-up and no ads.</p></div>
+        {TEMPLATES.filter((t) => t.cat === 'premium').map((t) => (
+          <div key={t.id} className="premium-feature">
+            <a href={`#/demo/${t.id}`} className="pf-art"><Art tpl={t} big /></a>
+            <div className="pf-txt">
+              <span className="badge gold">👑 {t.badge}</span>
+              <h3>{t.name}</h3>
+              <p>{t.desc}</p>
+              <ol className="pf-steps">{t.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+              <div className="row"><a className="btn gold" href={`#/new/${t.id}`}>Create it free</a><a className="btn ghost" href={`#/demo/${t.id}`}>▶ Watch the demo</a><a className="btn ghost" href="#/gifts?f=premium">All premium</a></div>
+            </div>
+          </div>
+        ))}
       </section>
 
       <section className="feature book-feature">

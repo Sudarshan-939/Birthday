@@ -28,6 +28,7 @@ export const CATS = [
   { id: 'desi', label: 'Desi specials' },
   { id: 'xp', label: 'Big experiences' },
   { id: 'decor', label: 'Decor & drawing' },
+  { id: 'premium', label: 'Premium ✦' },
 ];
 
 // ---- field shorthands ----

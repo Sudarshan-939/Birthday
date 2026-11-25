@@ -41,6 +41,13 @@ export function Art({ tpl, big }: { tpl: Template; big?: boolean }) {
   const th = THEMES.find((x) => x.id === tpl.theme) || THEMES[0];
   const c = th.colors;
   const em = graphemes(tpl.art);
+  if (tpl.cat === 'premium') return (
+    <div className={`art premium-art ${big ? 'big' : ''}`}>
+      <div className="pa-cover"><img src="/demo/photo-11.webp" alt="" loading="lazy" /><b className="pa-mast">VOGUE</b><span className="pa-name">{tpl.demo?.to || 'Sweety'}</span><small className="pa-ed">{tpl.demo?.age || '23'} BIRTHDAY EDITION</small></div>
+      <div className="pa-badge"><small>HAPPY BIRTHDAY</small><b>{tpl.demo?.to || 'Sweety'}</b></div>
+      <span className="pa-balloon">🎈</span>
+    </div>
+  );
   return (
     <div className={`art ${big ? 'big' : ''}`} style={{ background: `radial-gradient(circle at 30% 20%, ${c.accent2} 0, transparent 55%), radial-gradient(circle at 80% 90%, ${c.accent}55 0, transparent 50%), ${c.page}`, color: c.text }}>
       <div className="phone-mini" style={{ background: c.card, borderColor: c.text + '22' }}>
@@ -54,8 +61,8 @@ export function Art({ tpl, big }: { tpl: Template; big?: boolean }) {
 
 export function TemplateCard({ tpl }: { tpl: Template }) {
   return (
-    <article className="tcard">
-      <a href={`#/t/${tpl.id}`} className="tcard-art"><Art tpl={tpl} />{tpl.badge && <span className="badge">{tpl.badge}</span>}</a>
+    <article className={`tcard ${tpl.cat === 'premium' ? 'premium' : ''}`}>
+      <a href={`#/t/${tpl.id}`} className="tcard-art"><Art tpl={tpl} />{tpl.badge && <span className={`badge ${tpl.cat === 'premium' ? 'gold' : ''}`}>{tpl.cat === 'premium' ? '👑 ' : ''}{tpl.badge}</span>}</a>
       <div className="tcard-body">
         <small>{tpl.group}</small>
         <h3><a href={`#/t/${tpl.id}`}>{tpl.name}</a></h3>
@@ -86,7 +93,7 @@ export function TemplateBrowser({ initial = 'all', limit, title }: { initial?: s
   return (
     <div className="browser">
       {title}
-      <div className="feelings">{FEELINGS.map((x) => <button key={x.id} className={f === x.id ? 'on' : ''} onClick={() => setF(x.id)}><span>{x.icon}</span>{x.label}<small>{count(x.id)}</small></button>)}</div>
+      <div className="feelings">{FEELINGS.map((x) => <button key={x.id} className={`${f === x.id ? 'on' : ''} ${x.id === 'premium' ? 'gold' : ''}`} onClick={() => setF(x.id)}><span>{x.icon}</span>{x.label}<small>{count(x.id)}</small></button>)}</div>
       <div className="tools">
         <input type="search" placeholder="Search templates…" value={q} onChange={(e) => setQ(e.target.value)} />
         <select value={sort} onChange={(e) => setSort(e.target.value)}><option value="loved">Most loved</option><option value="newest">Newest first</option><option value="steps">Most to open</option><option value="az">A – Z</option></select>

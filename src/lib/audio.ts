@@ -120,7 +120,16 @@ export const TRACKS: Track[] = [
 
 const STEP_DIV = 2; // steps per beat
 
+let lastArgs: [string, string | undefined] | null = null;
+let userPaused = false;
+/** Pause from an in-gift control (music pill): the player will not auto-restart it on the next tap. */
+export function pauseMusic() { userPaused = true; stopMusic(); }
+export function resumeMusic(fallback = 'bloom') { userPaused = false; if (lastArgs) playMusic(lastArgs[0], lastArgs[1]); else playMusic(fallback); }
+export const isPaused = () => userPaused;
+
 export function playMusic(trackId: string, custom?: string, vol?: number) {
+  userPaused = false;
+  lastArgs = [trackId, custom];
   if (vol != null) setVolume(vol);
   if (currentTrack === trackId + (custom || '')) return;
   stopMusic();

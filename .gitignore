@@ -5,3 +5,4 @@ data
 *.log
 .single
 scripts/.smoke.mjs
+_reel

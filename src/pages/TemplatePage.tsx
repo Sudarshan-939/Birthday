@@ -27,7 +27,7 @@ export default function TemplatePage({ id }: { id: string }) {
       <section className="tpl-hero">
         <div className="tpl-info">
           <a href={`#/gifts?f=${tpl.cat}`} className="crumb">← {tpl.group}</a>
-          {tpl.badge && <span className="pill">{tpl.badge}</span>}
+          {tpl.badge && <span className={`pill ${tpl.cat === 'premium' ? 'gold' : ''}`}>{tpl.cat === 'premium' ? '👑 ' : ''}{tpl.badge}</span>}
           <h1>{tpl.name}</h1>
           <p className="lead">{tpl.tagline}</p>
           <p>{tpl.desc}</p>
@@ -36,7 +36,7 @@ export default function TemplatePage({ id }: { id: string }) {
             <div className="names">
               <label>Their name<input value={to} onChange={(e) => setTo(e.target.value)} placeholder="e.g. Aanya" /></label>
               <label>Your name<input value={from} onChange={(e) => setFrom(e.target.value)} placeholder="e.g. Kabir" /></label>
-              {tpl.cat === 'birthday' && <label>Age (optional)<input value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" inputMode="numeric" /></label>}
+              {(tpl.cat === 'birthday' || tpl.cat === 'premium') && <label>Age (optional)<input value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" inputMode="numeric" /></label>}
             </div>
             <button className="btn big" onClick={start}>Start making it — free</button>
             <small>No account needed. It saves in this browser as you go, and you can change it later.</small>

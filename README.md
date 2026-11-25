@@ -8,8 +8,9 @@ A free, open gift-page maker inspired by dilsecraft.com. Pick a template or star
 
 | | |
 |---|---|
-| **70 templates** | Birthday 9 · Love 16 · I Miss You 5 · I'm Sorry 6 · Anniversary 3 · Festivals 6 · Family 2 · Friends 2 · Thank You 2 · Celebrate 2 · 16 desi Mini Gifts · Make Your Own |
-| **116 building blocks** | Letters, typewriter wishes, chat, envelopes, reasons, promises, contracts, quizzes, scratch cards, cakes with blow-out candles, balloons, fireworks, polaroid walls, film rolls, Ken Burns, stories, a vinyl/cassette player, Spotify-style Wrapped, a 3D museum, a 3D photo album, a retro desktop, a storybook and more |
+| **71 templates** | 👑 Premium 1 · Birthday 9 · Love 16 · I Miss You 5 · I'm Sorry 6 · Anniversary 3 · Festivals 6 · Family 2 · Friends 2 · Thank You 2 · Celebrate 2 · 16 desi Mini Gifts · Make Your Own |
+| **126 building blocks** | Letters, typewriter wishes, chat, envelopes, reasons, promises, contracts, quizzes, scratch cards, cakes with blow-out candles, balloons, fireworks, polaroid walls, film rolls, Ken Burns, stories, a vinyl/cassette player, Spotify-style Wrapped, a 3D museum, a 3D photo album, a retro desktop, a storybook and more |
+| **👑 Premium section** | A gold-badged showcase on Home and in the gallery — still free, no login. First template: **Happy Birthday Sweety** (Birthday Cinema), a long birthday website with red-velvet curtains, a year counter, a balloons hero with music pill, a winding photo ribbon, a polaroid board, a flip-through Vogue magazine, a full-bleed photo and masonry wall, brush-reveal wishes, a swinging lanyard ID badge and an iPhone chat that types itself. Every word, photo, age and message is editable. |
 | **236 stickers** | 9 packs (Love, Sky & flowers, Party, Cute, Food, Festive, Things, Doodles, Words). Drag, pinch, rotate, animate |
 | **Look** | 12 themes plus custom page, card, text and accent colours; 5 fonts; Slide, Fade, Flip, Zoom or Curtain page turns; falling hearts, confetti, petals, snow or any emoji |
 | **Sound** | 9 built-in tracks, or upload your own song; 6 tap-sound sets |

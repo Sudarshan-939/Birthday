@@ -7,10 +7,12 @@ export type Template = {
   id: string; name: string; cat: string; group: string; tagline: string; desc: string; art: string;
   badge?: string; theme: string; font?: string; music?: string; effect?: Gift['effect']; opener?: Partial<Gift['opener']>; transition?: Gift['transition'];
   steps: string[]; build: () => Page[]; special?: 'book' | 'letter'; loved: number; added: number;
+  /** sample names used for previews when the maker has not typed any */
+  demo?: { to?: string; from?: string; age?: string };
 };
 
 export const FEELINGS = [
-  { id: 'all', label: 'All', icon: '✿' }, { id: 'miss', label: 'I Miss You', icon: '♡' }, { id: 'birthday', label: 'Birthday', icon: '🎂' },
+  { id: 'all', label: 'All', icon: '✿' }, { id: 'premium', label: 'Premium', icon: '👑' }, { id: 'miss', label: 'I Miss You', icon: '♡' }, { id: 'birthday', label: 'Birthday', icon: '🎂' },
   { id: 'love', label: 'Love', icon: '❥' }, { id: 'anniversary', label: 'Anniversary', icon: '✦' }, { id: 'thanks', label: 'Thank You', icon: '🌷' },
   { id: 'sorry', label: "I'm Sorry", icon: '🥺' }, { id: 'celebrate', label: 'Celebrate', icon: '🎉' }, { id: 'family', label: 'Family', icon: '🏠' },
   { id: 'festivals', label: 'Festivals', icon: '🪔' }, { id: 'friends', label: 'Friends', icon: '👯' }, { id: 'diy', label: 'Make Your Own', icon: '✎' }, { id: 'mini', label: 'Mini Gifts', icon: '🎈' },
@@ -27,6 +29,14 @@ let order = 0;
 const t = (o: Omit<Template, 'loved' | 'added'> & { loved?: number }): Template => ({ loved: 500, ...o, added: order++ });
 
 export const TEMPLATES: Template[] = [
+  // ---------------------------------------------------------------- Premium (free showcase)
+  t({ id: 'birthday-cinema', name: 'Happy Birthday Sweety', cat: 'premium', group: 'Premium · Birthday', badge: 'Premium', art: '🎈👑', theme: 'rose', font: 'classic', music: 'birthday', loved: 9900,
+    demo: { to: 'Sweety', from: 'Your love', age: '23' },
+    opener: { enabled: true, style: 'curtain', line: 'Happy Birthday {name} 🎀' },
+    tagline: 'A whole birthday website: curtains, a Vogue magazine, a lanyard badge and an iPhone chat', desc: 'The viral birthday website, made in Keepsake. Red velvet curtains open, the years count up to their age, balloons float over your photo with a music player, a photo ribbon winds past their name, polaroids get pinned, they flip through a Vogue magazine all about them, a photo paints itself in, a lanyard badge swings down and your messages type themselves out on an iPhone. Change every word and photo.',
+    steps: ['Red velvet curtains open', 'The years count up to their age', 'Balloons, their photo and a music player', 'Their name and a winding photo ribbon', 'Polaroids pinned to a board', 'A Vogue magazine they flip through', 'A photo wall and wishes that paint in', 'A swinging lanyard badge', 'Your messages typing out on an iPhone'],
+    build: () => [page('Birthday Cinema', pc('pm-count'), pc('pm-hero'), pc('pm-ribbon'), pc('pm-board'), pc('pm-mag'), pc('pm-bleed'), pc('pm-masonry'), pc('pm-wish'), pc('pm-badge'), pc('pm-chat'))] }),
+
   // ---------------------------------------------------------------- Experiences
   t({ id: 'love-story-book', name: 'Love Story Book', cat: 'love', group: 'Love', badge: 'Most made', art: '📖💞', theme: 'rose', font: 'classic', music: 'thread', loved: 9800, special: 'book',
     tagline: 'Your story, written as a whole designed book', desc: 'Answer a few questions about how it happened and get a designed book of 10 to 140 pages with your photos, in English or Hinglish. Read it as a flip book or save it as a PDF.',
@@ -299,7 +309,7 @@ export const findTemplate = (id: string) => TEMPLATES.find((x) => x.id === id);
 
 export function makeGift(tpl: Template, names: { to?: string; from?: string; age?: string } = {}): Gift {
   return {
-    v: 1, id: uid(10), templateId: tpl.id, title: tpl.name, to: names.to || 'Aanya', from: names.from || 'Kabir', age: names.age || '25',
+    v: 1, id: uid(10), templateId: tpl.id, title: tpl.name, to: names.to || tpl.demo?.to || 'Aanya', from: names.from || tpl.demo?.from || 'Kabir', age: names.age || tpl.demo?.age || '25',
     theme: tpl.theme, font: tpl.font || 'classic', transition: tpl.transition || 'slide',
     opener: { enabled: true, style: 'envelope', line: 'For {name} ♡', ...(tpl.opener || {}) },
     music: { track: tpl.music || 'bloom', volume: 0.6 }, sfx: 'chimes', effect: tpl.effect || { type: 'none' },

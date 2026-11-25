@@ -3,7 +3,7 @@ import type { Gift, Page, Sticker } from '../lib/types';
 import { themeVars, isDark } from '../lib/themes';
 import { fillDeep, fill, graphemes } from '../lib/util';
 import { PIECES } from '../pieces';
-import { playMusic, stopMusic, sfx, setSfxSet, isPlaying } from '../lib/audio';
+import { playMusic, stopMusic, sfx, setSfxSet, isPlaying, isPaused } from '../lib/audio';
 import { hearts, burst } from '../lib/fx';
 import { doodleSvg } from '../lib/stickers';
 
@@ -137,7 +137,7 @@ export default function Player({ gift, onExit, embedded }: { gift: Gift; onExit?
   const toggleMute = () => { if (muted || !isPlaying()) { setMuted(false); playMusic(gift.music.track, gift.music.custom, gift.music.volume); } else { setMuted(true); stopMusic(); } };
 
   return (
-    <div className={`player ${isDark(gift.theme) ? 'dark' : ''} ${embedded ? 'embedded' : ''}`} style={vars as any} onPointerDown={() => { if (phase === 'pages' && !muted && !isPlaying() && gift.music?.track !== 'none') startMusic(); }}>
+    <div className={`player ${isDark(gift.theme) ? 'dark' : ''} ${embedded ? 'embedded' : ''}`} style={vars as any} onPointerDown={() => { if (phase === 'pages' && !muted && !isPlaying() && !isPaused() && gift.music?.track !== 'none') startMusic(); }}>
       <Effects effect={gift.effect} />
       {phase === 'lock' && <LockScreen gift={gift} onOpen={afterLock} />}
       {phase === 'opener' && <Opener gift={gift} onOpen={open} />}
@@ -154,11 +154,11 @@ export default function Player({ gift, onExit, embedded }: { gift: Gift; onExit?
               {i === pages.length - 1 && <div className="pl-end"><button className="pc-btn ghost" onClick={() => { go(0); }}>↺ Watch again</button>{!embedded && <a className="pl-made" href={location.pathname + '#/'}>♡ Make a gift back</a>}</div>}
             </div>
           </div>
-          <div className="pl-nav">
+          {pages.length > 1 && <div className="pl-nav">
             <button onClick={() => go(i - 1)} disabled={i === 0}>‹</button>
             <span>{i + 1} / {pages.length}</span>
             <button className="nx" onClick={() => go(i + 1)} disabled={i >= pages.length - 1}>{i >= pages.length - 1 ? '♡' : 'Next ›'}</button>
-          </div>
+          </div>}
         </>
       )}
     </div>
