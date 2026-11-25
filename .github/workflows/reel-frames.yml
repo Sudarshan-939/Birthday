@@ -18,11 +18,11 @@ jobs:
           URL=$(curl -s https://api.streamable.com/videos/qxz9xo | python3 -c "import sys,json; print(json.load(sys.stdin)['files']['mp4']['url'])")
           curl -sL "$URL" -o /tmp/reel.mp4
           ls -la /tmp/reel.mp4
-          ffmpeg -loglevel error -i /tmp/reel.mp4 -vf "fps=2,scale=360:-2" -q:v 4 _reel/f_%03d.jpg
-          ffmpeg -loglevel error -i /tmp/reel.mp4 -vn -ac 1 -ar 16000 -b:a 32k _reel/audio.mp3 || true
+          mkdir -p _reel/hd && ffmpeg -loglevel error -i /tmp/reel.mp4 -vf "fps=2" -q:v 2 _reel/hd/h_%03d.jpg
+          true
           ffprobe -v error -show_entries format=duration -of csv=p=0 /tmp/reel.mp4 > _reel/info.txt
           ls _reel | wc -l
       - name: commit frames
         run: |
           git config user.name "frames-bot"; git config user.email "frames-bot@users.noreply.github.com"
-          git add _reel && git commit -m "temp: reel reference frames" && git push
+          git add _reel && git commit -m "temp: reel hd frames" && git push
