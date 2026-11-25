@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) =>
         plugins: [react()],
         css,
         build: { chunkSizeWarningLimit: 1200 },
-        server: { host: '0.0.0.0', allowedHosts: true },
+        server: { host: '0.0.0.0', allowedHosts: true, watch: { ignored: ['**/.single/**', '**/dist/**', '**/data/**'] } },
         preview: { host: '0.0.0.0', allowedHosts: true },
       },
 );
